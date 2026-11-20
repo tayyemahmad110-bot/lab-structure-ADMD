@@ -1,0 +1,16 @@
+import 'user.dart';
+
+abstract class LibraryItem {
+  final String title;
+  final String? author;
+  final DateTime? publishDate;
+  User? borrower;
+  DateTime? dueDate;
+
+  LibraryItem({required this.title, this.author, this.publishDate});
+
+  bool get isBorrowed => borrower != null;
+
+  /// Each subclass describes itself.
+  String describe();
+}
