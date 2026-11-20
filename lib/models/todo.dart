@@ -1,9 +1,34 @@
-class Todo {
-  static int _nextId = 0;
+import 'package:equatable/equatable.dart';
+import 'package:json_annotation/json_annotation.dart';
 
-  final int id; // unique, used as the Dismissible key
-  String title;
-  bool done;
+part 'todo.g.dart';
 
-  Todo(this.title, {this.done = false}) : id = _nextId++;
+@JsonSerializable()
+class Todo extends Equatable {
+  final int userId;
+  final int id;
+  final String title;
+  final bool completed;
+
+  const Todo({
+    required this.userId,
+    required this.id,
+    required this.title,
+    required this.completed,
+  });
+
+  factory Todo.fromJson(Map<String, dynamic> json) => _$TodoFromJson(json);
+
+  Map<String, dynamic> toJson() => _$TodoToJson(this);
+
+  /// All fields are final, so a change creates a new Todo.
+  Todo copyWith({String? title, bool? completed}) => Todo(
+    userId: userId,
+    id: id,
+    title: title ?? this.title,
+    completed: completed ?? this.completed,
+  );
+
+  @override
+  List<Object?> get props => [userId, id, title, completed];
 }

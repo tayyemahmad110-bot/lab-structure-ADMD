@@ -13,14 +13,15 @@ class TodoTile extends StatelessWidget {
     return Card(
       margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
       child: ListTile(
-        leading: Checkbox(value: todo.done, onChanged: onChanged),
+        leading: Checkbox(value: todo.completed, onChanged: onChanged),
         title: Text(
           todo.title,
           style: TextStyle(
-            decoration: todo.done ? TextDecoration.lineThrough : null,
-            color: todo.done ? Colors.grey : null,
+            decoration: todo.completed ? TextDecoration.lineThrough : null,
+            color: todo.completed ? Colors.grey : null,
           ),
         ),
+        subtitle: Text('#${todo.id} · user ${todo.userId}'),
       ),
     );
   }
